@@ -323,7 +323,7 @@ if (!isset($_SESSION['username'])) {
 		messageElements.forEach(messageElement => {
 			let messageObject = {};
 			messageObject.role = messageElement.dataset.role;
-			messageObject.content = messageElement.querySelector(".message-text").textContent;
+			messageObject.content = messageElement.dataset.content;
 			requestObject.messages.push(messageObject);
 		})
 		
@@ -378,6 +378,7 @@ if (!isset($_SESSION['username'])) {
 				if(chunk.length == 0) return false;
 				if(chunk != "") console.log(JSON.parse(chunk)["choices"][0]["delta"])
 				console.log(JSON.parse(chunk)["choices"][0]["delta"]);
+				document.querySelector(".message:last-child").dataset.content += JSON.parse(chunk)["choices"][0]["delta"].content;
 				document.querySelector(".message:last-child").querySelector(".message-text").innerHTML +=  escapeHTML(JSON.parse(chunk)["choices"][0]["delta"].content);
 			})
 
@@ -405,6 +406,8 @@ if (!isset($_SESSION['username'])) {
 		
 		messageElement.querySelector(".message-text").innerHTML = escapeHTML(message.content);
 		messageElement.querySelector(".message").dataset.role = message.role;
+		messageElement.querySelector(".message").dataset.content = message.content;
+
 		
 		if(message.role == "assistant"){
 			messageElement.querySelector(".message-icon").textContent = "AI";
