@@ -118,6 +118,9 @@ if (!isset($_SESSION['username'])) {
 	<div class="info">
 	  <a href="#" onclick="load(this, 'about.htm')">Über HAWK-KI</a>
 	  <a href="logout.php">Abmelden</a>
+	  <a href="<?= htmlspecialchars(isset($env) ? $env["FEEDBACK_LOCATION"] : getenv("FEEDBACK_LOCATION")) ?>">
+		Feedback
+	  </a>
 	  <br>
 	  <a href="#" onclick="load(this, 'datenschutz.htm')">Datenschutz</a>
 	  <a href="/impressum" target="_blank">Impressum</a>
