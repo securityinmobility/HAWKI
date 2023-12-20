@@ -114,7 +114,7 @@ if (!isset($_SESSION['username'])) {
 	</div>
 	<div class="info">
 	  <a href="#" onclick="load(this, 'about.htm')">Über HAWK-KI</a>
-	  <a href="logout.php">Abmelden</a>
+	  <a href="<?= htmlspecialchars((isset($env) ? $env["OIDC_LOGOUT_URI"] : getenv("OIDC_LOGOUT_URI")) ?: "logout.php") ?>">Abmelden</a>
 	  <a href="<?= htmlspecialchars(isset($env) ? $env["FEEDBACK_LOCATION"] : getenv("FEEDBACK_LOCATION")) ?>">
 		Feedback
 	  </a>
